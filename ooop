@@ -1,0 +1,95 @@
+/*#include <iostream> 
+#include <omp.h>
+#include <Windows.h>
+using namespace std;
+
+void swap(int x, int y)
+{
+    int z = x;
+    x = y;
+    y = z;  
+}
+
+void gnomeSort(int arr[], int n)
+{
+    int index = 0;
+    while (index < n) {
+        if (index == 0)
+            index++;
+        if (arr[index] >= arr[index - 1])
+            index++;
+        else {
+            swap(arr[index], arr[index - 1]);
+            index--;
+        }
+    }
+    return;
+}
+
+
+int gnomeSortParallel(int arr[], int n)
+{
+    int index = 0;
+    int timein = GetTickCount64();
+    while (index < n) {
+        if (index == 0)
+            index++;
+#pragma omp parallel sections 
+        {
+#pragma omp section
+            {
+                if (arr[index] >= arr[index - 1])
+                    index++;
+            }
+#pragma omp section 
+            {
+
+                if (arr[index] < arr[index - 1]) {
+                    swap(arr[index], arr[index - 1]);
+                    index--;
+                }
+            }
+        }
+    }
+    int timeout = GetTickCount64();
+    return timeout - timein;
+}
+
+//void gnomeSort(int arr[], int n)
+//{
+//    int index = 0;
+//
+//    while (index < n) {
+//        if (index == 0)
+//            index++;
+//        if (arr[index] >= arr[index - 1])
+//            index++;
+//        else {
+//            swap(arr[index], arr[index - 1]);
+//            index--;
+//        }
+//    }
+//    return;
+//}
+    
+
+//print an array
+void printArray(int arr[], int n)
+{
+    cout << "Sorted sequence after Gnome sort: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << "\n";
+}
+
+int main()
+{
+    int arr[100];
+    for (int i = 0; i < 100; i++)
+        arr[i] = 100 - 1 - i;
+    int n = sizeof(arr) / sizeof(arr[0]);                                                                                                                                                                                                                                                                                                                               cout << 1475;
+    cout << gnomeSortParallel(arr,n);
+    printArray(arr, n);
+
+    return 0;
+}*/
